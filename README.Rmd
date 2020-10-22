@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = FALSE, eval = TRUE)
 ```
 # Description
 
-This repo includes files (Rmd, md, images...) for a Bike Rental Analysis project built in RStudio. The project analyzes 2 years of bike rental data and employees a regression tree model and boosted regression tree model to predict bike rentals for each day of the week based on a set of categorical & quantitative variables (e.g. hour of the day, weather conditions, temperature, humidity...)
+This repo includes files (Rmd, md, images...) for a Bike Rental Analysis project built in RStudio. The project analyzes 2 years of bike rental data and employees a regression tree model and boosted regression tree model to predict bike rentals for each day of the week based on a set of categorical & quantitative variables (e.g. hour of the day, weather conditions, temperature, humidity...) test
 
 # Project Repo
 
