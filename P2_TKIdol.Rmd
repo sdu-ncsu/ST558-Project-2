@@ -368,8 +368,39 @@ Based on the summary analysis the "workday" variable and "windspeed" variables a
 
 A Regression Tree model is used for the initial prediction.  An iterative approach using "Leave One Out Cross Validation" is employed to determine the best variables and complexity parameter for lowest RMSE for a given computational time (unscientifically measured) were used to determine the final model.  All predictors are initially trained with variable importance plot produced.  The top 3 and bottom 3 (non-zero) most/least important factors were compared to the "all fit".  "Top 3 Fit" predictors had the  the RMSE for the optimal computer generated CP as the "All Fit".  Adding additional predictors did not lower RMSE.  Removing predictors increased RMSE. "Top 3 Fit" was chosen for tuning based on a vector of CP's.  The highest CP that did not significantly lower RMSE was chosen as the best Final Model.  Prediction using the final model was run against the test data set with final results output
 
+### Linear Model added by Shuang Du
 
-### All 5 Preditor Fit - Program Defined CP
+```{r}
+lmfit <- train (rentals ~ ., 
+                data=bikeTrain1, 
+                method="lm", 
+                preProcess = c("center", "scale"), 
+                trControl = trainControl(method = "LOOCV"))
+lmfit$results
+```
+
+### Prediction with Linear Model added by Shuang Du
+```{r}
+
+lmPred <- predict(lmfit, newdata = bikeTest1)
+
+# create tibble
+lmPred_results <- as_tibble(postResample(lmPred, bikeTest1$rentals))
+
+# round results
+lmPred_results$value <- round(lmPred_results$value, digits = 2)
+
+# rename rows for output
+setattr(lmPred_results, "row.names", c("RMSE", "Rsquared", "MAE"))
+
+# output prediction results
+kable(lmPred_results, caption = "Boosted Tree Prediction Results")
+
+```
+
+
+
+### All 5 Predictor Fit - Program Defined CP
 
 ```{r, rtree all}
 # train all predictors
